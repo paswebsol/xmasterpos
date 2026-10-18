@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#123c35">
+<meta name="description" content="Master POS — installable point-of-sale app for Android, iPhone, tablets and computers.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Master POS">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<title>Master POS</title>
+<style>
+:root{--green:#123c35;--lime:#c9ef73;--paper:#f4f6f1;--ink:#172521;--muted:#697771;--line:#dfe6df;--white:#fff;--red:#b83232;--gold:#f5c35c}
+*{box-sizing:border-box}html{width:100%;max-width:100%;overflow-x:hidden;scroll-behavior:auto;-webkit-text-size-adjust:100%;text-size-adjust:100%}body{margin:0;width:100%;max-width:100%;overflow-x:hidden;background:var(--paper);color:var(--ink);font:15px system-ui,-apple-system,Segoe UI,sans-serif;overscroll-behavior-x:none}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:11px 14px;font-weight:700}.primary{background:var(--green);color:white}.secondary{background:#e7eee7;color:var(--green)}.danger{background:#fff0ef;color:var(--red)}.wrap{width:100%;max-width:1100px;margin:0 auto;padding:16px;min-width:0}.top{background:var(--green);color:white;padding:20px 16px 16px}.topin{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{font-size:22px;font-weight:850;letter-spacing:-.5px}.brand span{color:var(--lime)}.sub{color:#d5e3db;font-size:13px;margin-top:3px}.pill{border:1px solid #56766b;border-radius:99px;padding:7px 10px;font-size:12px;color:#e3f4e7;white-space:nowrap}.tabs{display:flex;gap:7px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:12px 0;position:relative;top:auto;background:var(--paper);z-index:2;max-width:100%;min-width:0}.tabs::-webkit-scrollbar{display:none}.tab{white-space:nowrap;background:#e6ebe5;color:#3d5149}.tab.active{background:var(--green);color:white}.view{display:none;min-width:0;max-width:100%}.view.active{display:block}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;min-width:0}.card{background:white;border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:13px;min-width:0;max-width:100%;box-shadow:0 2px 8px #173c3510}.stat small{display:block;color:var(--muted);font-weight:650}.stat strong{display:block;font-size:25px;margin-top:8px;letter-spacing:-.5px;overflow-wrap:anywhere}.stat em{font-style:normal;color:var(--muted);font-size:12px}.head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.head h2,.card h2{font-size:18px;margin:0}.muted{color:var(--muted)}.row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}.field label{font-size:13px;font-weight:750;color:#3b4b44}.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid #d6dfd7;border-radius:11px;background:#fff;color:var(--ink);min-width:0}.field textarea{min-height:76px;resize:vertical}.formgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.actions{display:flex;gap:8px;flex-wrap:wrap}.tablewrap{width:100%;max-width:100%;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}table{border-collapse:collapse;width:100%;min-width:600px}th,td{text-align:left;padding:11px 9px;border-bottom:1px solid #edf0ec;font-size:13px}th{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.4px}td strong{font-size:14px}.badge{display:inline-block;border-radius:99px;padding:4px 8px;font-size:11px;font-weight:800;background:#e7f5df;color:#38622b}.badge.low{background:#fff0dc;color:#8d5700}.badge.red{background:#ffebea;color:#a62d2d}.empty{padding:22px;text-align:center;color:var(--muted)}.notice{background:#fff7df;border:1px solid #f0dfac;padding:12px;border-radius:12px;color:#654e17;font-size:13px;margin-bottom:14px}.good{color:#2e713e}.bad{color:var(--red)}.small{font-size:12px}.footer{text-align:center;color:var(--muted);padding:22px;font-size:12px}.copyright-footer{text-align:center;color:#697771;font-size:11px;line-height:1.5;padding:18px 12px 22px;margin-top:18px;border-top:1px solid #dfe6df;overflow-wrap:anywhere}
+.search{max-width:320px;width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px}.hide{display:none!important}.checkrow{display:flex;gap:8px;align-items:center}.checkrow input{width:auto}.receipt{border:1px dashed #bac8bb;padding:12px;border-radius:10px;margin-top:10px;white-space:pre-wrap;font-family:ui-monospace,monospace;font-size:12px}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.row{grid-template-columns:1fr}.formgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.wrap{padding:12px}.top{padding:16px 12px}.brand{font-size:20px}.stat strong{font-size:22px}.topin{align-items:flex-start}.pill{font-size:10px}}
+@media(max-width:400px){.formgrid{grid-template-columns:1fr}.pill{display:none}}
+@media(max-width:520px){.wrap{padding:10px}.card{padding:13px;border-radius:15px}.topin{min-width:0}.brand{line-height:1.15}.sub{font-size:12px}.tabs{margin:0 -10px;padding:10px;scroll-snap-type:x proximity}.tab{padding:10px 12px;scroll-snap-align:start}.head{align-items:flex-start;flex-wrap:wrap}.head h2{font-size:17px}.search{max-width:100%;width:100%}.formgrid{grid-template-columns:minmax(0,1fr)}.row{grid-template-columns:minmax(0,1fr)}.grid{gap:8px}.stat{padding:12px}.stat strong{font-size:clamp(18px,5vw,23px);line-height:1.2;overflow-wrap:anywhere}.stat small{font-size:12px}.actions button{flex:1 1 auto}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* Professional sales history */
+.history-intro{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin:0 0 14px}
+.history-intro p{margin:5px 0 0;color:var(--muted);font-size:13px}
+.history-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:12px 0 16px}
+.history-kpi{border:1px solid var(--line);border-radius:14px;padding:13px;background:linear-gradient(145deg,#fff,#f8faf7);min-width:0}
+.history-kpi span{display:block;color:var(--muted);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.45px}
+.history-kpi strong{display:block;font-size:20px;line-height:1.25;margin-top:7px;overflow-wrap:anywhere}
+.history-kpi em{display:block;font-style:normal;color:var(--muted);font-size:11px;margin-top:4px}
+.history-panel{border:1px solid var(--line);border-radius:15px;overflow:hidden;background:#fff}
+.history-panel-head{padding:14px 15px;background:#f8faf7;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.history-panel-head h3{font-size:15px;margin:0}
+.history-panel-head p{font-size:12px;color:var(--muted);margin:4px 0 0}
+.history-count{white-space:nowrap;border-radius:99px;padding:5px 9px;background:#e5eee7;color:var(--green);font-size:11px;font-weight:800}
+.history-table table{min-width:850px}
+.history-table th{background:#fbfcfa;white-space:nowrap}
+.history-table td{vertical-align:top;padding-top:13px;padding-bottom:13px}
+.history-table tbody tr:hover{background:#fbfdf9}
+.history-main{font-weight:800;color:var(--ink)}
+.history-sub{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4}
+.money-cell{font-weight:800;white-space:nowrap}
+.status-pill{display:inline-flex;align-items:center;gap:5px;border-radius:99px;padding:5px 8px;font-size:11px;font-weight:800;white-space:nowrap}
+.status-paid{background:#e8f6e9;color:#28683a}
+.status-partial{background:#fff2d9;color:#8b5a00}
+.status-unpaid{background:#ffebea;color:#a52b2b}
+.history-product-list{display:flex;flex-direction:column;gap:5px;min-width:150px}
+.history-product-line{display:flex;justify-content:space-between;gap:10px;font-size:12px;padding:5px 7px;border-radius:7px;background:#f5f8f3}
+.history-product-line span:last-child{font-weight:750;white-space:nowrap}
+.history-tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.history-tools .search{max-width:none;flex:1 1 240px}
+.history-note{padding:10px 13px;background:#f6f9f4;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+@media(max-width:760px){.history-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.history-kpi strong{font-size:18px}.history-panel-head{align-items:flex-start}.history-count{font-size:10px}}
+
+
+.invoice-actions{display:flex;gap:6px;flex-wrap:wrap}
+#invoicePrintRoot{display:none}
+.invoice-modal-backdrop{position:fixed;inset:0;z-index:1000;background:#0009;display:flex;align-items:center;justify-content:center;padding:12px}
+.invoice-modal{background:#f1f4f0;border-radius:14px;padding:12px;width:min(100%,820px);max-height:95vh;overflow:auto}
+.invoice-tools{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.invoice-paper{background:#fff;color:#18231b;padding:22px;border:1px solid #d9e2d8;max-width:760px;margin:auto}
+.invoice-head{display:flex;justify-content:space-between;gap:12px;border-bottom:2px solid #24603c;padding-bottom:14px}
+.invoice-brand{font-size:24px;font-weight:900;color:#24603c}.invoice-cedi-mark{display:inline-grid;place-items:center;width:30px;height:30px;margin-right:5px;border-radius:50%;background:#24603c;color:#fff;font-size:20px;vertical-align:middle}.invoice-title{font-size:22px;font-weight:900;text-align:right}
+.invoice-muted{font-size:12px;color:#657367;line-height:1.5}
+.invoice-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.invoice-meta>div{background:#f5f8f4;border:1px solid #e1e8df;border-radius:8px;padding:10px}
+.invoice-meta small{display:block;text-transform:uppercase;font-size:10px;color:#657367;font-weight:800}
+.invoice-items{width:100%;border-collapse:collapse;margin:12px 0}.invoice-items th,.invoice-items td{border-bottom:1px solid #e5ebe3;padding:8px 5px;text-align:left;font-size:12px}
+.invoice-items th{background:#f3f7f1;font-size:10px;text-transform:uppercase}.invoice-items td:last-child,.invoice-items th:last-child{text-align:right}
+.invoice-totals{width:min(100%,300px);margin-left:auto}.invoice-total{display:flex;justify-content:space-between;gap:12px;padding:6px 0;font-size:13px}
+.invoice-grand{border-top:2px solid #24603c;font-size:18px;font-weight:900;padding-top:10px}
+.invoice-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;border-top:1px dashed #ccd6ca;margin-top:18px;padding-top:12px}
+.invoice-qr{text-align:center;max-width:125px}.invoice-qr canvas{width:110px;height:110px}.invoice-qr small{display:block;font-size:9px;color:#657367}
+@media(max-width:560px){.invoice-paper{padding:12px}.invoice-brand{font-size:20px}.invoice-title{font-size:18px}.invoice-items th,.invoice-items td{font-size:10px;padding:6px 3px}.invoice-qr canvas{width:88px;height:88px}}
+@media print{body>*{display:none!important}#invoicePrintRoot{display:block!important}#invoicePrintRoot .invoice-modal-backdrop{position:static;background:white;padding:0;display:block}#invoicePrintRoot .invoice-modal{width:100%;max-height:none;overflow:visible;padding:0;background:white}#invoicePrintRoot .invoice-tools{display:none!important}#invoicePrintRoot .invoice-paper{border:0;max-width:none}}
+
+
+/* Professional visual refresh — keeps existing app logic and records intact */
+:root{--green:#123c35;--lime:#c9ef73;--paper:#f3f6f3;--ink:#172521;--muted:#68776f;--line:#e1e8e2;--white:#fff;--red:#b83232;--gold:#f5c35c}
+body{background:#f3f6f3;color:#172521;line-height:1.45}
+.top{background:linear-gradient(115deg,#0d302a 0%,#174b40 62%,#23614c 100%);padding:22px 18px 20px;position:relative;overflow:hidden}
+.top:after{content:"";position:absolute;width:230px;height:230px;border:1px solid #ffffff18;border-radius:50%;right:-75px;top:-135px;box-shadow:0 0 0 28px #ffffff08,0 0 0 58px #ffffff06;pointer-events:none}
+.topin{position:relative;z-index:1;max-width:1180px}
+.brand{font-size:25px;letter-spacing:-.8px;display:flex;align-items:center;gap:10px}
+.brand:before{content:"₵";display:grid;place-items:center;width:37px;height:37px;border-radius:12px;background:var(--lime);color:#173d32;font-size:14px;font-weight:950;letter-spacing:-1px;box-shadow:0 4px 12px #0002}
+.sub{color:#c6d9d0}
+.pill{background:#ffffff0d;border-color:#ffffff35;backdrop-filter:blur(8px);font-weight:750}
+.wrap{max-width:1180px;padding:18px 18px 32px}
+.notice{border-radius:14px;border-color:#e9dba8;background:#fff9e8;box-shadow:0 2px 8px #4e421008}
+.tabs{gap:6px;padding:12px 0 16px;background:#f3f6f3;position:sticky;top:0;z-index:20}
+.tab{border:1px solid transparent;border-radius:11px;padding:10px 13px;background:transparent;color:#56665d;font-size:13px;transition:background .15s ease,color .15s ease}
+.tab:hover{background:#e5ece6;color:var(--green)}
+.tab.active{background:#123c35;color:white;box-shadow:0 4px 10px #123c3522}
+.card{border-color:#e2e9e3;border-radius:18px;padding:18px;box-shadow:0 4px 18px #1d3b2a08;transition:box-shadow .15s,border-color .15s}
+.card:hover{box-shadow:0 7px 24px #1d3b2a0d;border-color:#d5e1d7}
+.grid{gap:14px}
+.stat{position:relative;overflow:hidden;padding:19px}
+.stat:after{content:"";position:absolute;right:-22px;top:-24px;width:82px;height:82px;border-radius:50%;background:#eaf3e8}
+.stat small,.stat strong,.stat em{position:relative;z-index:1}
+.stat small{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:#65756b}
+.stat strong{font-size:clamp(22px,2.2vw,29px);margin-top:10px;letter-spacing:-.9px}
+.stat em{display:block;margin-top:6px;line-height:1.35}
+.head{margin-bottom:15px}
+.head h2,.card h2{letter-spacing:-.35px}
+button{transition:transform .12s ease,box-shadow .12s ease,background .12s ease;border-radius:11px}
+button:active{transform:translateY(1px)}
+.primary{background:#123c35;box-shadow:0 3px 8px #123c351c}
+.primary:hover{background:#205448}
+.secondary{background:#edf3ed;color:#214b3d;border:1px solid #dce7dd}
+.secondary:hover{background:#e2ece2}
+.danger{border:1px solid #f4d9d6}
+.field label{font-size:12px;text-transform:uppercase;letter-spacing:.35px;color:#53645a}
+.field input,.field select,.field textarea{border-color:#dce5dc;border-radius:11px;min-height:44px;outline:none;transition:border-color .15s,box-shadow .15s}
+.field input:focus,.field select:focus,.field textarea:focus,.search:focus{border-color:#4b8a6a;box-shadow:0 0 0 3px #4b8a6a20;outline:none}
+table{border-collapse:separate;border-spacing:0}
+th{background:#f7faf7}
+td,th{border-bottom:1px solid #edf1ed}
+tbody tr:hover{background:#f9fcf8}
+.badge{letter-spacing:.1px}
+.empty{background:#f8faf8;border:1px dashed #dbe5dc;border-radius:12px;margin-top:8px}
+.dashboard-hero{display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:225px;padding:28px 30px;margin:2px 0 24px;border-radius:23px;color:#fff;background:radial-gradient(circle at 80% 20%,#ffffff13 0 1px,transparent 2px),linear-gradient(120deg,#123c35 0%,#1a5546 66%,#287053 100%);background-size:18px 18px,auto;box-shadow:0 12px 30px #153f3020;position:relative;overflow:hidden}
+.dashboard-hero:before{content:"";position:absolute;width:280px;height:280px;border:1px solid #ffffff17;border-radius:50%;right:9%;top:-140px;box-shadow:0 0 0 28px #ffffff08,0 0 0 58px #ffffff06}
+.hero-copy{position:relative;z-index:1;max-width:690px}
+.eyebrow{display:block;font-size:10px;letter-spacing:1.4px;font-weight:900;color:#6e987f}
+.dashboard-hero .eyebrow{color:#c9ef73}
+.dashboard-hero h1{font-size:clamp(25px,3.2vw,38px);line-height:1.12;letter-spacing:-1.2px;margin:10px 0 9px;max-width:650px}
+.dashboard-hero p{font-size:14px;line-height:1.6;color:#d6e7de;max-width:560px;margin:0}
+.hero-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}
+.hero-button{background:#c9ef73;color:#163b30;padding:12px 16px;box-shadow:0 4px 12px #0002}
+.hero-button:hover{background:#d8f89b}
+.hero-button.ghost{background:#ffffff12;color:#fff;border:1px solid #ffffff3a;box-shadow:none}
+.hero-button.ghost:hover{background:#ffffff20}
+.hero-mark{position:relative;z-index:1;min-width:150px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.hero-ring{width:116px;height:116px;border:1px solid #c9ef7370;border-radius:50%;display:grid;place-items:center;background:#ffffff0a;box-shadow:0 0 0 12px #ffffff08,inset 0 0 28px #ffffff08}
+.hero-ring span{font-size:58px;font-weight:850;color:#c9ef73;letter-spacing:-3px}
+.hero-mark small{font-size:9px;font-weight:850;letter-spacing:1px;color:#c7ded2;white-space:nowrap}
+.section-intro{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 13px}
+.section-intro h2{margin:4px 0 2px;font-size:21px;letter-spacing:-.5px}
+.section-intro p{margin:0;color:var(--muted);font-size:12px}
+.live-badge{display:inline-flex;align-items:center;gap:7px;border:1px solid #dce8dc;background:#fff;border-radius:99px;padding:7px 10px;color:#496452;font-size:11px;font-weight:800;white-space:nowrap}
+.live-badge i{width:7px;height:7px;background:#46a66a;border-radius:50%;box-shadow:0 0 0 3px #46a66a20}
+.view:not(#dashboard){padding-top:3px}
+.bp-award{display:flex;align-items:center;gap:16px;padding:18px 20px;margin-top:16px;border:1px solid #ead18a;border-radius:16px;background:linear-gradient(120deg,#fff9df,#fffdf5);box-shadow:0 7px 22px rgba(145,105,12,.08)}.bp-award-icon{flex:0 0 58px;width:58px;height:58px;border-radius:17px;display:grid;place-items:center;background:linear-gradient(145deg,#f6d66b,#d99b19);font-size:31px;box-shadow:inset 0 1px 0 #fff8c9}.bp-award-copy{min-width:0}.bp-award-label{font-size:10px;letter-spacing:1.3px;font-weight:900;color:#8b6410;text-transform:uppercase}.bp-award h3{font-size:19px;margin:4px 0;color:#533d0a;overflow-wrap:anywhere}.bp-award p{margin:3px 0 0;font-size:13px;color:#755d25}.bp-award-empty{background:#f7faf7;border-color:#e0e8e1;box-shadow:none}.bp-award-empty .bp-award-icon{background:#e9efea;box-shadow:none}.bp-award-empty h3{color:#31473a}.bp-medal{display:inline-flex;align-items:center;gap:4px;padding:4px 8px;border-radius:999px;background:#fff1b8;color:#80590a;font-size:11px;font-weight:900;white-space:nowrap}.bp-first{background:#fff9e5!important;color:#80590a!important;border:1px solid #f0d77e}@media(max-width:520px){.bp-award{padding:14px;gap:11px}.bp-award-icon{width:46px;height:46px;flex-basis:46px;font-size:25px}.bp-award h3{font-size:16px}}
+.bp-graph{display:grid;gap:13px;padding:8px 0}.bp-row{display:grid;grid-template-columns:minmax(90px,170px) minmax(80px,1fr) 95px;align-items:center;gap:12px}.bp-name{font-size:13px;font-weight:750;overflow-wrap:anywhere}.bp-track{height:18px;background:#edf2ed;border-radius:99px;overflow:hidden}.bp-fill{height:100%;min-width:2px;border-radius:99px;background:linear-gradient(90deg,#236b50,#91c85a)}.bp-value{text-align:right;font-size:12px;font-weight:800;color:#28513d}.bp-rank{display:inline-grid;place-items:center;width:25px;height:25px;border-radius:8px;background:#e8f2e9;color:#24543d;margin-right:6px;font-size:11px}@media(max-width:520px){.bp-row{grid-template-columns:minmax(75px,1fr) minmax(65px,1.1fr) 62px;gap:7px}.bp-name{font-size:11px}.bp-value{font-size:11px}}
+.view:not(#dashboard)> .card:first-child{margin-top:6px}
+.footer{border-top:1px solid #e0e8e1;margin-top:24px}
+@media(max-width:760px){.dashboard-hero{padding:23px 20px;min-height:0}.hero-mark{min-width:105px}.hero-ring{width:88px;height:88px}.hero-ring span{font-size:45px}.hero-mark small{font-size:8px}.section-intro h2{font-size:19px}}
+@media(max-width:520px){.top{padding:17px 12px}.brand{font-size:20px}.brand:before{width:33px;height:33px}.wrap{padding:12px 10px 26px}.tabs{top:0;margin:0 -10px;padding:8px 10px 11px;background:#f3f6f3}.tab{padding:10px 12px;font-size:12px}.dashboard-hero{display:block;padding:22px 18px;border-radius:19px;margin-bottom:20px}.dashboard-hero h1{font-size:27px;letter-spacing:-.7px}.dashboard-hero p{font-size:13px}.hero-actions{margin-top:16px}.hero-actions button{flex:1 1 135px}.hero-mark{display:none}.section-intro{align-items:flex-start}.live-badge{font-size:10px;padding:6px 8px}.card{padding:14px}.stat{padding:13px}.stat:after{width:55px;height:55px;right:-17px;top:-18px}.notice{font-size:12px}}
+@media(prefers-reduced-motion:reduce){button{transition:none}}
+
+</style></head>
+<body>
+<header class="top"><div class="topin"><div><div class="brand">Master POS</div></div><div class="pill">● OFFLINE READY · GHS ₵</div></div></header>
+<main class="wrap">
+
+<nav class="tabs" id="tabs">
+<button class="tab active" data-view="dashboard">Overview</button><button class="tab" data-view="sales">Sales</button><button class="tab" data-view="stock">Stock</button><button class="tab" data-view="debts">Debts</button><button class="tab" data-view="expenses">Expenses</button><button class="tab" data-view="staff">Staff</button><button class="tab" data-view="reports">Reports</button><button class="tab" data-view="bestProducts">Best-selling Products</button><button class="tab" data-view="backup">Backup & Settings</button><button class="tab" data-view="archives">Digital Archives</button>
+</nav>
+<section id="dashboard" class="view active">
+<div class="dashboard-hero">
+  <div class="hero-copy"><span class="eyebrow">YOUR BUSINESS AT A GLANCE</span><h1>Good business starts with clear numbers.</h1><p>Track sales, stock, customer balances and expenses in one simple offline workspace.</p>
+  <div class="hero-actions"><button class="hero-button" data-go="sales">＋ Record a sale</button><button class="hero-button ghost" data-go="reports">View business report ₵</button></div></div>
+  <div class="hero-mark" aria-hidden="true"><div class="hero-ring"><span>₵</span></div><small>LOCAL · PRIVATE · OFFLINE</small></div>
+</div>
+<div class="section-intro"><div><span class="eyebrow">TODAY'S SNAPSHOT</span><h2>Business overview</h2><p>Live totals from records saved on this device.</p></div><span class="live-badge"><i></i> On this device</span></div>
+<div class="grid">
+<div class="card stat"><small>Sales today</small><strong id="kSales">₵0.00</strong><em>All recorded payments</em></div>
+<div class="card stat"><small>Estimated gross profit</small><strong id="kProfit">₵0.00</strong><em>Sales less cost of goods sold</em></div>
+<div class="card stat"><small>Money still owed</small><strong id="kDebt">₵0.00</strong><em>Unpaid customer balances</em></div>
+<div class="card stat"><small>Low-stock items</small><strong id="kLow">0</strong><em>At or below reorder level</em></div>
+</div>
+<div class="card"><div class="head"><h2>Quick actions</h2></div><div class="actions"><button class="primary" data-go="sales">＋ Record a sale</button><button class="secondary" data-go="stock">＋ Add stock</button><button class="secondary" data-go="debts">＋ Record debt/payment</button><button class="secondary" data-go="expenses">＋ Add expense</button></div></div>
+<div class="card"><div class="head"><h2>Stock alerts</h2><button class="secondary" data-go="stock">View stock</button></div><div id="dashAlerts" class="empty">No stock alerts yet.</div></div>
+<div class="card"><div class="head"><h2>Recent activity</h2></div><div id="recent" class="empty">Your sales and expenses will appear here.</div></div>
+<div class="copyright-footer">© Copyright. Unauthorized copying, modification, or distribution of this software without the owner’s permission is prohibited. Protection mechanisms are built into the code to help prevent violations. Offenders may face legal consequences.</div>
+</section>
+<section id="sales" class="view">
+<div class="card"><h2>Record a sale</h2><p class="muted small">Select a product to calculate estimated profit and reduce stock automatically.</p>
+<form id="saleForm"><div class="formgrid">
+<div class="field"><label>Search product</label><input id="saleProductSearch" type="search" placeholder="Type product name or category…" autocomplete="off"><label for="saleProduct" style="margin-top:7px">Select product</label><select id="saleProduct"></select></div><div class="field"><label>Quantity sold</label><input id="saleQty" type="number" min=".001" step=".001" value="1" required></div><div class="field"><label>Selling price per unit (₵)</label><input id="salePrice" type="number" min="0" step=".01" required></div>
+<div class="field"><label>Payment method</label><select id="saleMethod"><option>Cash</option><option>Mobile Money</option><option>Credit / unpaid</option><option>Bank transfer</option></select></div><div class="field"><label>MoMo reference (optional)</label><input id="saleRef" placeholder="Transaction/reference ID"></div><div class="field"><label>Customer (optional)</label><input id="saleCustomer" placeholder="Name or phone"></div><div class="field"><label>Staff serving this sale (optional)</label><select id="saleStaff"><option value="">No staff selected</option></select><small class="muted">Add staff in the Staff section first. You can leave this blank.</small></div>
+<div class="field"><label>Date</label><input id="saleDate" type="date" required></div><div class="field"><label>Discount (₵)</label><input id="saleDiscount" type="number" min="0" step=".01" value="0"></div><div class="field"><label>Amount received now (₵)</label><input id="salePaid" type="number" min="0" step=".01" placeholder="Auto-calculated"></div>
+</div><div class="notice" id="salePreview">Choose a product to preview totals.</div>
+<div class="actions" style="margin:10px 0"><button class="secondary" type="button" id="addBillItem">＋ Add product to bill</button><button class="secondary" type="button" id="clearBill">Clear bill</button></div>
+<div id="billCart" class="tablewrap"></div>
+<div class="notice" id="billSummary" style="margin:10px 0">Bill total: ₵0.00</div>
+<button class="primary" type="submit">Save complete bill</button></form></div>
+<div class="card">
+<div class="history-intro"><div><h2>Sales history</h2><p>Search and review transactions, payments, balances, and profit in one place.</p></div></div>
+<div class="history-kpis">
+<div class="history-kpi"><span>Single-product sales</span><strong id="histSingleCount">0</strong><em>Individual product transactions</em></div>
+<div class="history-kpi"><span>Multi-product bills</span><strong id="histMultiCount">0</strong><em>Combined customer bills</em></div>
+<div class="history-kpi"><span>Total sales value</span><strong id="histSalesTotal">₵0.00</strong><em>All visible transactions</em></div>
+<div class="history-kpi"><span>Outstanding balance</span><strong id="histBalanceTotal">₵0.00</strong><em>Not yet collected</em></div>
+</div>
+<div class="history-tools"><input class="search" id="salesSearch" placeholder="Search customer, product, bill ID or MoMo reference"><button type="button" class="secondary" id="clearSalesSearch">Clear search</button></div>
+<div class="history-panel" style="margin-bottom:14px">
+<div class="history-panel-head"><div><h3>Single-product sales</h3><p>One product per transaction, with its own payment and profit details.</p></div><span class="history-count" id="singleHistoryBadge">0 records</span></div>
+<div id="salesTable" class="tablewrap history-table"></div>
+<div class="history-note">Each row is one single-product transaction. Use Void only to correct a genuine mistake.</div>
+</div>
+<div class="history-panel">
+<div class="history-panel-head"><div><h3>Multi-product bills</h3><p>All products bought together by a customer are grouped into one bill.</p></div><span class="history-count" id="multiHistoryBadge">0 bills</span></div>
+<div id="multiBillsTable" class="tablewrap history-table"></div>
+<div class="history-note">Each bill shows its item list, combined amount, amount received, remaining balance, and estimated profit.</div>
+</div>
+</div>
+<div class="copyright-footer">© Copyright. Unauthorized copying, modification, or distribution of this software without the owner’s permission is prohibited. Protection mechanisms are built into the code to help prevent violations. Offenders may face legal consequences.</div>
+</section>
+<section id="stock" class="view">
+<div class="card"><h2>Add or update product</h2><form id="productForm"><input id="productId" type="hidden"><div class="formgrid">
+<div class="field"><label>Product name</label><input id="pName" required placeholder="e.g. Rice 5kg"></div><div class="field"><label>Category</label><input id="pCategory" placeholder="Food, clothing..."></div><div class="field"><label>Unit</label><input id="pUnit" placeholder="piece, bag, kg" value="piece"></div>
+<div class="field"><label>Buying cost per unit (₵)</label><input id="pCost" type="number" min="0" step=".01" required></div><div class="field"><label>Selling price per unit (₵)</label><input id="pPrice" type="number" min="0" step=".01" required></div><div class="field"><label>Opening/current quantity</label><input id="pQty" type="number" min="0" step=".001" value="0" required></div><div class="field"><label>Low-stock alert at</label><input id="pReorder" type="number" min="0" step=".001" value="5"></div><div class="field"><label>Supplier (optional)</label><input id="pSupplier"></div></div><div class="actions"><button class="primary" type="submit">Save product</button><button class="secondary" type="button" id="cancelProduct">Clear form</button></div></form></div>
+<div class="card"><div class="head"><h2>Inventory — current stock</h2><input class="search" id="stockSearch" placeholder="Search stock"></div><div id="stockTable" class="tablewrap"></div></div>
+<div class="card"><div class="head"><div><h2>Individual product stock movement</h2><p class="muted small">See quantities sold (taken out through sales), stock added, stock removed through adjustments, and the quantity available now.</p></div><button class="secondary" id="exportStockMovement">Export stock movement CSV</button></div><div class="field"><label>Search product movement</label><input class="search" id="movementSearch" placeholder="Search product name, category or supplier"></div><div id="stockMovementTable" class="tablewrap"></div></div>
+<div class="card"><h2>Stock adjustment / restock</h2><p class="muted small">Use positive quantity for new stock; negative quantity for wastage or a counted shortage. Adjustments are logged.</p><form id="adjustForm"><div class="row"><div class="field"><label>Search product</label><input id="adjProductSearch" type="search" placeholder="Type product name or category…" autocomplete="off"><label for="adjProduct" style="margin-top:7px">Select product</label><select id="adjProduct" required></select></div><div class="field"><label>Quantity change (+/-)</label><input id="adjQty" type="number" step=".001" required placeholder="e.g. 12 or -2"></div></div><div class="row"><div class="field"><label>Reason</label><select id="adjReason"><option>Restock / purchase</option><option>Wastage / damage</option><option>Physical count correction</option><option>Other</option></select></div><div class="field"><label>Note</label><input id="adjNote"></div></div><button class="primary" type="submit">Save adjustment</button></form><div id="adjustments"></div></div>
+<div class="copyright-footer">© Copyright. Unauthorized copying, modification, or distribution of this software without the owner’s permission is prohibited. Protection mechanisms are built into the code to help prevent violations. Offenders may face legal consequences.</div>
+</section>
+<section id="debts" class="view"><div class="card"><h2>Customer debts</h2><p class="muted small">Credit sales create balances. Record repayments here to keep outstanding debt accurate.</p><form id="debtForm"><div class="formgrid"><div class="field"><label>Customer name</label><input id="dName" required></div><div class="field"><label>Phone (optional)</label><input id="dPhone"></div><div class="field"><label>Amount owed (₵)</label><input id="dAmount" type="number" min=".01" step=".01" required></div><div class="field"><label>Due date (optional)</label><input id="dDue" type="date"></div><div class="field"><label>Note</label><input id="dNote"></div></div><button class="primary" type="submit">Add debt</button></form></div><div class="card"><div class="head"><h2>Outstanding balances</h2><input id="debtSearch" class="search" placeholder="Search customer"></div><div id="debtTable" class="tablewrap"></div></div><div class="copyright-footer">© Copyright. Unauthorized copying, modification, or distribution of this software without the owner’s permission is prohibited. Protection mechanisms are built into the code to help prevent violations. Offenders may face legal consequences.</div>
+</section>
+<section id="expenses" class="view"><div class="card"><h2>Record business expense</h2><form id="expenseForm"><div class="formgrid"><div class="field"><label>Description</label><input id="eDesc" required placeholder="Transport, rent, packaging..."></div><div class="field"><label>Amount (₵)</label><input id="eAmount" type="number" min=".01" step=".01" required></div><div class="field"><label>Payment method</label><select id="eMethod"><option>Cash</option><option>Mobile Money</option><option>Bank transfer</option></select></div><div class="field"><label>Date</label><input id="eDate" type="date" required></div><div class="field"><label>Reference (optional)</label><input id="eRef"></div></div><button class="primary" type="submit">Save expense</button></form></div><div class="card"><div class="head"><h2>Expense history</h2></div><div id="expenseTable" class="tablewrap"></div></div><div class="copyright-footer">© Copyright. Unauthorized copying, modification, or distribution of this software without the owner’s permission is prohibited. Protection mechanisms are built into the code to help prevent violations. Offenders may face legal consequences.</div>
+</section>
+<section id="staff" class="view"><div class="card"><h2>Staff & shift accountability</h2><form id="staffForm"><div class="row"><div class="field"><label>Staff name</label><input id="stName" required></div><div class="field"><label>Role / stall</label><input id="stRole" placeholder="Cashier, sales assistant..."></div></div><button class="primary" type="submit">Add staff</button></form><p class="muted small">Choose the staff member making each sale. This helps compare recorded sales, but is not proof of theft.</p><div class="field"><label>Current operator</label><select id="operator"></select></div><div id="staffTable" class="tablewrap"></div><div class="head" style="margin-top:18px"><h2>Activity log</h2><button class="secondary" id="exportActivity">Export activity CSV</button></div><p class="muted small">Records key actions performed in this browser, including sales, stock adjustments, expenses, debt payments and voids. This is an accountability aid, not tamper-proof security; anyone with access to browser storage may alter local data.</p><div id="activityTable" class="tablewrap"></div></div><div class="copyright-footer">© Copyright. Unauthorized copying, modification, or distribution of this software without the owner’s permission is prohibited. Protection mechanisms are built into the code to help prevent violations. Offenders may face legal consequences.</div>
+</section>
+<section id="reports" class="view"><div class="card"><div class="head"><h2>Business report</h2><button class="secondary" id="exportReport">Export report CSV</button></div><div class="row"><div class="field"><label>From date</label><input type="date" id="rFrom"></div><div class="field"><label>To date</label><input type="date" id="rTo"></div></div><button class="primary" id="runReport">Run report</button><div id="reportResult"></div></div><div class="card"><h2>Profit calculation</h2><p class="muted small">Estimated gross profit = sale total after discount − recorded cost of sold items. Estimated net profit = gross profit − recorded business expenses. Unpaid credit sales are counted as sales on the sale date, so cash received and profit are not the same. Actual results depend on correct buying costs and stock counts.</p></div><div class="copyright-footer">© Copyright. Unauthorized copying, modification, or distribution of this software without the owner’s permission is prohibited. Protection mechanisms are built into the code to help prevent violations. Offenders may face legal consequences.</div>
+</section>
+
+<section id="bestProducts" class="view">
+<div class="card"><div class="section-intro"><div><span class="eyebrow">PRODUCT PERFORMANCE</span><h2>Best-selling products</h2><p>Ranked from highest to lowest by quantity sold, calculated from recorded sales on this device.</p></div><span class="live-badge"><i></i> Live ranking</span></div>
+<div class="formgrid"><div class="field"><label for="bpFrom">From date</label><input type="date" id="bpFrom"></div><div class="field"><label for="bpTo">To date</label><input type="date" id="bpTo"></div></div><div class="actions" style="margin:12px 0 18px"><button class="primary" id="bpApply" type="button">Update ranking</button><button class="secondary" id="bpClear" type="button">All dates</button><button class="secondary" id="bpExport" type="button">Export ranking CSV</button></div>
+<div id="bpSummary" class="grid"></div><div id="bpAward"></div></div>
+<div class="card"><div class="head"><div><h2>Sales quantity graph</h2><p class="muted small">Longer bars mean more units sold during the selected period.</p></div></div><div id="bpGraph" class="bp-graph" role="img" aria-label="Bar graph of best-selling products"></div></div>
+<div class="card"><div class="head"><div><h2>Product ranking</h2><p class="muted small">Use this list to identify fast-moving products and plan restocking.</p></div></div><div id="bpTable" class="tablewrap"></div><p class="muted small">Products with no sales in the selected period are shown after products with sales. Rankings use quantity sold; revenue is shown as a secondary measure. Voided sales are excluded.</p></div>
+<div class="copyright-footer">© Copyright. Unauthorized copying, modification, or distribution of this software without the owner’s permission is prohibited. Protection mechanisms are built into the code to help prevent violations. Offenders may face legal consequences.</div>
+</section>
+<section id="archives" class="view">
+ <div class="card">
+  <h2>Digital Archives</h2>
+  <p class="muted">Keep important business documents on this device for offline access. Examples: supplier invoices, receipts, permits, contracts, product photos and customer documents.</p>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px">
+   <div class="field"><label for="archiveTitle">Document title *</label><input id="archiveTitle" maxlength="120" placeholder="e.g. Supplier invoice October"></div>
+   <div class="field"><label for="archiveCategory">Category</label><select id="archiveCategory"><option>Receipts</option><option>Supplier invoices</option><option>Business permits</option><option>Contracts</option><option>Customer records</option><option>Product photos</option><option>Other</option></select></div>
+   <div class="field"><label for="archiveDate">Document date</label><input id="archiveDate" type="date"></div>
+  </div>
+  <div class="field"><label for="archiveNotes">Notes (optional)</label><textarea id="archiveNotes" rows="2" maxlength="1000" placeholder="Add a short description or reference"></textarea></div>
+  <div class="field"><label for="archiveFile">Choose document or photo *</label><input id="archiveFile" type="file"><small class="muted">Stored in this browser on this device. Large files may exceed device/browser storage limits.</small></div>
+  <button id="archiveSave" class="primary" type="button">Save to Archives</button>
+  <span id="archiveStatus" class="muted small" role="status"></span>
+ </div>
+ <div class="card" style="margin-top:14px">
+  <div class="row" style="align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap"><h2>Archived documents</h2><button id="archiveExportIndex" class="secondary" type="button">Export document list (CSV)</button></div>
+  <div class="field"><label for="archiveSearch">Search documents</label><input id="archiveSearch" placeholder="Search title, category, notes or filename"></div>
+  <div id="archiveStats" class="muted small"></div>
+  <div id="archiveList" class="stack"><p class="muted">Loading archives…</p></div>
+ </div>
+<div class="copyright-footer">© Copyright. Unauthorized copying, modification, or distribution of this software without the owner’s permission is prohibited. Protection mechanisms are built into the code to help prevent violations. Offenders may face legal consequences.</div>
+</section>
+
+<section id="backup" class="view"><div class="card"><h2>Business setup</h2><div class="field"><label>Business / stall name</label><input id="bizName" placeholder="My Market Stall"></div><div class="field"><label>Owner name (optional)</label><input id="ownerName"></div><button class="primary" id="saveSettings">Save settings</button><p class="muted small">Currency is Ghana cedi (GHS). All dates are stored as entered.</p></div>
+<div class="card"><h2>Backup and restore</h2><p class="muted">Export a full JSON backup before changing phones or clearing browser data. Restore replaces the current records.</p><div class="actions"><button class="primary" id="backupBtn">Download full backup</button><label class="secondary" style="display:inline-flex;align-items:center;gap:6px">Restore backup<input id="restoreFile" type="file" accept=".json,application/json" style="max-width:190px"></label><button class="secondary" id="csvSales">Export sales CSV</button><button class="secondary" id="csvStock">Export stock CSV</button></div><div class="notice" style="margin-top:14px">Privacy: records are stored locally in this browser on this device. They are not automatically sent to another phone. For multi-phone shared records, a separate local network/server or sync system is required.</div><button class="danger" id="clearAll">Delete all app data</button></div>
+<div class="card"><h2>How to use offline</h2><ol><li>Keep this folder/ZIP on your phone or computer and open <b>index.html</b> in a browser.</li><li>Save this app to your home screen if your browser offers that option.</li><li>Enter products and accurate buying costs before recording sales.</li><li>Back up records daily. Do not clear browser storage unless backed up.</li></ol><p class="small muted">For reliable offline use on iPhone, Android, and desktop, install as a PWA from HTTPS or package it as an app; opening a raw HTML file has browser-specific limits.</p></div><div class="copyright-footer">© Copyright. Unauthorized copying, modification, or distribution of this software without the owner’s permission is prohibited. Protection mechanisms are built into the code to help prevent violations. Offenders may face legal consequences.</div>
+</section>
+</main>
+<script>
+const KEY='marketmate_offline_v1';
+const today=()=>new Date().toLocaleDateString('en-CA');
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const blank=()=>({products:[],sales:[],debts:[],expenses:[],staff:[],adjustments:[],activity:[],settings:{bizName:'',ownerName:''}});
+let db; try{db=JSON.parse(localStorage.getItem(KEY))||blank()}catch(e){db=blank()}
+// Migrate older backups/local records safely without discarding existing data.
+db.activity=Array.isArray(db.activity)?db.activity:[];db.products=db.products||[];db.sales=db.sales||[];db.debts=db.debts||[];db.expenses=db.expenses||[];db.staff=db.staff||[];db.adjustments=db.adjustments||[];db.settings=db.settings||{bizName:'',ownerName:''};
+function logActivity(action,details=''){db.activity.push({id:uid(),date:today(),time:new Date().toLocaleTimeString(),operator:document.getElementById('operator')?.selectedOptions?.[0]?.textContent||'Current device user',action,details});if(db.activity.length>2000)db.activity=db.activity.slice(-2000)}
+const save=()=>{localStorage.setItem(KEY,JSON.stringify(db));renderAll()};
+const money=n=>'₵'+(Number(n)||0).toLocaleString('en-GH',{minimumFractionDigits:2,maximumFractionDigits:2});
+const num=id=>Number(document.getElementById(id).value)||0;
+const val=id=>document.getElementById(id).value.trim();
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const dateInput=(id)=>document.getElementById(id).value||today();
+function download(name,content,type='text/plain'){const a=document.createElement('a');const blob=new Blob([content],{type});a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+function csv(rows){return rows.map(r=>r.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n')}
+function show(id){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===id));document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.view===id));if(id==='sales')updateSalePreview();if(id==='bestProducts')renderBestProducts();if(id==='archives')renderArchives();window.scrollTo(0,0)}
+document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>show(b.dataset.view));document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>show(b.dataset.go));
+function product(id){return db.products.find(p=>p.id===id)}
+function populateSelect(id,selected){
+ const el=document.getElementById(id),old=selected??el.value;
+ const searchId=id==='saleProduct'?'saleProductSearch':id==='adjProduct'?'adjProductSearch':'';
+ const q=searchId?val(searchId).trim().toLowerCase():'';
+ const matches=db.products.filter(p=>!q||(String(p.name||'')+' '+String(p.category||'')+' '+String(p.unit||'')+' '+String(p.supplier||'')).toLowerCase().includes(q));
+ el.innerHTML='<option value="">'+(q?'Choose matching product':'Select product')+'</option>'+matches.map(p=>`<option value="${p.id}">${esc(p.name)} — ${p.qty} ${esc(p.unit)}</option>`).join('');
+ if(old&&matches.some(p=>p.id===old))el.value=old;
+}
+function table(headers,rows){if(!rows.length)return '<div class="empty">No records yet.</div>';return '<table><thead><tr>'+headers.map(h=>`<th>${h}</th>`).join('')+'</tr></thead><tbody>'+rows.join('')+'</tbody></table>'}
+function renderStock(){const q=val('stockSearch').toLowerCase();document.getElementById('stockTable').innerHTML=table(['Product','Available now','Cost','Selling price','Stock value','Status','Actions'],db.products.filter(p=>(p.name+' '+p.category+' '+p.supplier).toLowerCase().includes(q)).map(p=>`<tr><td><strong>${esc(p.name)}</strong><div class="muted small">${esc(p.category||'')} · ${esc(p.unit)}</div></td><td><strong>${Number(p.qty)||0} ${esc(p.unit||'')}</strong></td><td>${money(p.cost)}</td><td>${money(p.price)}</td><td>${money(p.qty*p.cost)}</td><td>${p.qty<=p.reorder?'<span class="badge low">LOW STOCK</span>':'<span class="badge">In stock</span>'}</td><td><button class="secondary" onclick="editProduct('${p.id}')">Edit</button> <button class="danger" onclick="deleteProduct('${p.id}')">Delete</button></td></tr>`));renderStockMovement();populateSelect('saleProduct');populateSelect('adjProduct')}
+function stockMovementRows(){const q=(document.getElementById('movementSearch')?.value||'').trim().toLowerCase();return db.products.filter(p=>(String(p.name||'')+' '+String(p.category||'')+' '+String(p.supplier||'')).toLowerCase().includes(q)).map(p=>{const sales=db.sales.filter(x=>x.productId===p.id);const adjustments=db.adjustments.filter(a=>a.productId===p.id);const sold=sales.reduce((sum,x)=>sum+(Number(x.qty)||0),0);const added=adjustments.reduce((sum,a)=>sum+Math.max(0,Number(a.qty)||0),0);const removed=adjustments.reduce((sum,a)=>sum+Math.max(0,-(Number(a.qty)||0)),0);return {p,sold,added,removed,available:Number(p.qty)||0,saleCount:sales.length}})}
+function renderStockMovement(){const rows=stockMovementRows();document.getElementById('stockMovementTable').innerHTML=table(['Product','Stock taken out (sold)','Stock added','Stock removed / wastage','Available now','Sales records'],rows.map(({p,sold,added,removed,available,saleCount})=>`<tr><td><strong>${esc(p.name)}</strong><div class="muted small">${esc(p.category||'')} · ${esc(p.unit||'')}</div></td><td><strong>${sold} ${esc(p.unit||'')}</strong></td><td class="good">+${added} ${esc(p.unit||'')}</td><td class="bad">${removed} ${esc(p.unit||'')}</td><td><strong>${available} ${esc(p.unit||'')}</strong>${available<=Number(p.reorder||0)?'<div><span class="badge low">LOW STOCK</span></div>':''}</td><td>${saleCount}</td></tr>`))}
+function editProduct(id){const p=product(id);if(!p)return;[['productId',p.id],['pName',p.name],['pCategory',p.category],['pUnit',p.unit],['pCost',p.cost],['pPrice',p.price],['pQty',p.qty],['pReorder',p.reorder],['pSupplier',p.supplier]].forEach(([i,v])=>document.getElementById(i).value=v);show('stock');window.scrollTo(0,0)}
+function deleteProduct(id){if(!confirm('Delete this product? Past sale records remain.'))return;db.products=db.products.filter(p=>p.id!==id);save()}
+
+function invoiceQrMatrix(text){
+ const data=Array.from(new TextEncoder().encode(text)).slice(0,78),bits=[];
+ const push=(v,n)=>{for(let i=n-1;i>=0;i--)bits.push((v>>i)&1)};
+ push(4,4);push(data.length,8);data.forEach(b=>push(b,8));push(0,Math.min(4,640-bits.length));while(bits.length%8)bits.push(0);
+ const cw=[];for(let i=0;i<bits.length;i+=8){let b=0;for(let j=0;j<8;j++)b=(b<<1)|(bits[i+j]||0);cw.push(b)}for(let i=0;cw.length<80;i++)cw.push(i%2?0x11:0xec);
+ const mul=(x,y)=>{let r=0;while(y){if(y&1)r^=x;x<<=1;if(x&256)x^=0x11d;y>>=1}return r};
+ let gen=[1];for(let i=0;i<20;i++){let a=1;for(let j=0;j<=i;j++)a=mul(a,2);let n=Array(gen.length+1).fill(0);gen.forEach((v,j)=>{n[j]^=v;n[j+1]^=mul(v,a)});gen=n}
+ let rem=Array(20).fill(0);for(const b of cw){let f=b^rem[0];rem.shift();rem.push(0);for(let j=0;j<20;j++)rem[j]^=mul(gen[j+1],f)}
+ const stream=[];cw.concat(rem).forEach(b=>{for(let i=7;i>=0;i--)stream.push((b>>i)&1)});
+ const n=33,m=Array.from({length:n},()=>Array(n).fill(null)),put=(x,y,v)=>{if(x>=0&&y>=0&&x<n&&y<n)m[y][x]=!!v};
+ function finder(x,y){for(let dy=-1;dy<=7;dy++)for(let dx=-1;dx<=7;dx++){let X=x+dx,Y=y+dy;if(X<0||Y<0||X>=n||Y>=n)continue;put(X,Y,(dx>=0&&dx<=6&&(dy===0||dy===6))||(dy>=0&&dy<=6&&(dx===0||dx===6))||(dx>=2&&dx<=4&&dy>=2&&dy<=4))}}
+ finder(0,0);finder(n-7,0);finder(0,n-7);for(let i=8;i<n-8;i++){put(i,6,i%2===0);put(6,i,i%2===0)}put(8,n-8,true);
+ for(let i=0;i<9;i++)if(i!==6){put(8,i,false);put(i,8,false)}for(let i=0;i<8;i++){put(n-1-i,8,false);put(8,n-1-i,false)}
+ let k=0,up=true;for(let right=n-1;right>0;right-=2){if(right===6)right--;for(let v=0;v<n;v++){let y=up?n-1-v:v;for(let j=0;j<2;j++){let x=right-j;if(m[y][x]===null){let b=k<stream.length?stream[k++]:0;if((x+y)%2===0)b^=1;m[y][x]=!!b}}}up=!up}
+ let f=8,r=f;for(let i=0;i<10;i++)r=(r<<1)^(((r>>9)&1)?0x537:0);f=((f<<10)|r)^0x5412;
+ for(let i=0;i<=5;i++)put(8,i,(f>>i)&1);put(8,7,(f>>6)&1);put(8,8,(f>>7)&1);put(7,8,(f>>8)&1);for(let i=9;i<15;i++)put(14-i,8,(f>>i)&1);for(let i=0;i<8;i++)put(n-1-i,8,(f>>i)&1);for(let i=8;i<15;i++)put(8,n-15+i,(f>>i)&1);
+ return m;
+}
+function drawInvoiceQr(canvas,payload){let m=invoiceQrMatrix(payload),c=canvas.getContext('2d'),s=4,q=4,n=m.length;canvas.width=canvas.height=(n+q*2)*s;c.fillStyle='#fff';c.fillRect(0,0,canvas.width,canvas.height);c.fillStyle='#111';m.forEach((row,y)=>row.forEach((v,x)=>{if(v)c.fillRect((x+q)*s,(y+q)*s,s,s)}))}
+function invoiceStatus(total,paid){let b=Math.max(0,total-paid);return b<0.005?'PAID':paid>0?'PARTIALLY PAID':'UNPAID'}
+function invoiceShow(inv){
+ const root=document.getElementById('invoicePrintRoot'),balance=Math.max(0,inv.total-inv.paid),status=invoiceStatus(inv.total,inv.paid);
+ const payload=JSON.stringify({app:'Master POS',invoice:inv.id,date:inv.date,customer:inv.customer,total:inv.total,paid:inv.paid,balance,items:inv.lines.map(x=>({product:x.productName,qty:x.qty,total:x.total}))});
+ const subtotal=inv.lines.reduce((a,x)=>a+Number(x.qty||0)*Number(x.price||0),0),discount=inv.lines.reduce((a,x)=>a+Number(x.discount||0),0);
+ root.innerHTML=`<div class="invoice-modal-backdrop" onclick="if(event.target===this)invoiceClose()"><div class="invoice-modal"><div class="invoice-tools"><button class="secondary" onclick="invoiceClose()">Close</button><button class="primary" onclick="window.print()">Print / Save PDF</button></div><div class="invoice-paper"><div class="invoice-head"><div><div class="invoice-brand"><span class="invoice-cedi-mark">₵</span> Master POS</div><div class="invoice-muted">Sales invoice · ${inv.kind==='multi'?'Multi-product bill':'Single-product sale'}</div><div class="invoice-muted">Thank you for shopping with us.</div></div><div><div class="invoice-title">INVOICE</div><div class="invoice-muted" style="text-align:right">No. <b>${esc(inv.id)}</b><br>Date: <b>${esc(inv.date||'—')}</b></div></div></div>
+ <div class="invoice-meta"><div><small>Customer</small><b>${esc(inv.customer||'Walk-in customer')}</b></div><div><small>Payment status</small><b>${status}</b><div class="invoice-muted">Method: ${esc(inv.method||'—')}${inv.ref?' · Ref: '+esc(inv.ref):''}</div></div></div>
+ <table class="invoice-items"><thead><tr><th>Product</th><th>Qty</th><th>Unit price</th><th>Discount</th><th>Total</th></tr></thead><tbody>${inv.lines.map(x=>`<tr><td>${esc(x.productName||'Product')}</td><td>${esc(String(x.qty??0))}</td><td>${money(x.price)}</td><td>${money(x.discount||0)}</td><td>${money(x.total)}</td></tr>`).join('')}</tbody></table>
+ <div class="invoice-totals"><div class="invoice-total"><span>Subtotal</span><b>${money(subtotal)}</b></div><div class="invoice-total"><span>Discount</span><b>${money(discount)}</b></div><div class="invoice-total invoice-grand"><span>Total</span><b>${money(inv.total)}</b></div><div class="invoice-total"><span>Amount received</span><b>${money(inv.paid)}</b></div><div class="invoice-total"><span>Balance due</span><b>${money(balance)}</b></div></div>
+ <div class="invoice-foot"><div><b>Served by</b><div class="invoice-muted">${esc(inv.operator||'Staff not recorded')}</div><div class="invoice-muted" style="margin-top:10px">Please keep this invoice for your records.</div></div><div class="invoice-qr"><canvas id="invoiceQrCanvas"></canvas><small>Scan for invoice details<br>Generated offline</small></div></div><div class="invoice-muted" style="text-align:center;margin-top:12px">QR code contains invoice information. It is not a payment QR.</div></div></div></div>`;
+ root.dataset.invoice=JSON.stringify(inv);root.style.display='block';drawInvoiceQr(document.getElementById('invoiceQrCanvas'),payload);
+}
+function invoiceClose(){let r=document.getElementById('invoicePrintRoot');r.innerHTML='';r.style.display='none';r.dataset.invoice=''}
+function invoiceForSale(id){let s=db.sales.find(x=>x.id===id);if(!s)return alert('Sale not found.');invoiceShow({id:s.id,date:s.date,customer:s.customer||'Walk-in customer',lines:[{productName:s.productName,qty:s.qty,price:s.price,discount:s.discount||0,total:s.total}],total:Number(s.total||0),paid:Number(s.paid||0),method:s.method,ref:s.ref,operator:s.operator,kind:'single'})}
+function invoiceForBill(id){let ss=db.sales.filter(s=>s.billId===id);if(!ss.length)return alert('Bill not found.');let s=ss[0],total=ss.reduce((a,x)=>a+Number(x.total||0),0),paid=ss.reduce((a,x)=>a+Number(x.paid||0),0);invoiceShow({id,date:s.date,customer:s.customer||'Walk-in customer',lines:ss.map(x=>({productName:x.productName,qty:x.qty,price:x.price,discount:x.discount||0,total:x.total})),total,paid,method:s.method,ref:s.ref,operator:s.operator,kind:'multi'})}
+
+function renderSales(){
+ const q=val('salesSearch').toLowerCase().trim();
+ const matches=db.sales.filter(s=>(String(s.productName||'')+' '+String(s.customer||'')+' '+String(s.ref||'')+' '+String(s.billId||'')+' '+String(s.id||'')).toLowerCase().includes(q));
+ const singles=matches.filter(s=>!s.billId).slice().sort((a,b)=>(b.date||'').localeCompare(a.date||'')||String(b.id).localeCompare(String(a.id)));
+ const groups={};
+ matches.filter(s=>s.billId).forEach(s=>{if(!groups[s.billId])groups[s.billId]=[];groups[s.billId].push(s)});
+ const bills=Object.entries(groups).map(([id,lines])=>{
+   const first=lines[0],total=lines.reduce((a,x)=>a+Number(x.total||0),0),paid=lines.reduce((a,x)=>a+Number(x.paid||0),0);
+   return {id,lines,date:first.date||'',customer:first.customer||'Walk-in customer',method:first.method||'—',operator:first.operator||'',ref:first.ref||'',total,paid,balance:Math.max(0,total-paid),profit:lines.reduce((a,x)=>a+Number(x.profit||0),0)};
+ }).sort((a,b)=>b.date.localeCompare(a.date)||b.id.localeCompare(a.id));
+ const allVisible=[...singles,...bills];
+ const visibleTotal=allVisible.reduce((a,x)=>a+Number(x.total||0),0);
+ const visibleBalance=allVisible.reduce((a,x)=>a+Math.max(0,Number(x.total||0)-Number(x.paid||0)),0);
+ document.getElementById('histSingleCount').textContent=singles.length;
+ document.getElementById('histMultiCount').textContent=bills.length;
+ document.getElementById('histSalesTotal').textContent=money(visibleTotal);
+ document.getElementById('histBalanceTotal').textContent=money(visibleBalance);
+ document.getElementById('singleHistoryBadge').textContent=singles.length+' record'+(singles.length===1?'':'s');
+ document.getElementById('multiHistoryBadge').textContent=bills.length+' bill'+(bills.length===1?'':'s');
+ const paymentStatus=(total,paid)=>{
+   const balance=Math.max(0,Number(total||0)-Number(paid||0));
+   if(balance<=0.005)return '<span class="status-pill status-paid">● Paid</span>';
+   if(Number(paid||0)>0)return '<span class="status-pill status-partial">● Part-paid</span>';
+   return '<span class="status-pill status-unpaid">● Unpaid</span>';
+ };
+ document.getElementById('salesTable').innerHTML=singles.length?table(
+ ['Date / receipt','Product and customer','Qty','Sale total','Received','Balance / status','Payment / staff','Est. profit','Action'],
+ singles.map(s=>`<tr>
+ <td><div class="history-main">${esc(s.date||'—')}</div><div class="history-sub">Receipt · ${esc(String(s.id||'').slice(-8)||'—')}</div></td>
+ <td><div class="history-main">${esc(s.productName||'Product')}</div><div class="history-sub">Customer: ${esc(s.customer||'Walk-in')}${s.ref?'<br>MoMo ref: '+esc(s.ref):''}</div></td>
+ <td>${esc(String(s.qty??0))}</td><td class="money-cell">${money(s.total)}</td><td>${money(s.paid)}</td>
+ <td><div class="money-cell">${money(Math.max(0,Number(s.total||0)-Number(s.paid||0)))}</div><div style="margin-top:5px">${paymentStatus(s.total,s.paid)}</div></td>
+ <td>${esc(s.method||'—')}<div class="history-sub">${esc(s.operator||'Staff not recorded')}</div></td><td class="money-cell">${money(s.profit)}</td>
+ <td><div class="invoice-actions"><button class="primary" onclick="invoiceForSale('${s.id}')">Invoice + QR</button><button class="danger" onclick="voidSale('${s.id}')">Void</button></div></td></tr>`))
+ :'<div class="empty">'+(q?'No single-product sales match your search.':'No single-product sales recorded yet.')+'</div>';
+ document.getElementById('multiBillsTable').innerHTML=bills.length?table(
+ ['Date / bill ID','Customer','Products in bill','Combined total','Received','Balance / status','Payment / staff','Est. profit','Action'],
+ bills.map(b=>`<tr>
+ <td><div class="history-main">${esc(b.date||'—')}</div><div class="history-sub">Bill · ${esc(b.id)}</div></td>
+ <td><div class="history-main">${esc(b.customer)}</div><div class="history-sub">${b.ref?'MoMo ref: '+esc(b.ref):'Customer bill'} </div></td>
+ <td><div class="history-product-list">${b.lines.map(x=>`<div class="history-product-line"><span>${esc(x.productName||'Product')} × ${esc(String(x.qty??0))}</span><span>${money(x.total)}</span></div>`).join('')}</div><div class="history-sub" style="margin-top:6px">${b.lines.length} product line${b.lines.length===1?'':'s'}</div></td>
+ <td class="money-cell">${money(b.total)}</td><td>${money(b.paid)}</td>
+ <td><div class="money-cell">${money(b.balance)}</div><div style="margin-top:5px">${paymentStatus(b.total,b.paid)}</div></td>
+ <td>${esc(b.method)}<div class="history-sub">${esc(b.operator||'Staff not recorded')}</div></td><td class="money-cell">${money(b.profit)}</td>
+ <td><div class="invoice-actions"><button class="primary" onclick="invoiceForBill('${b.id}')">Invoice + QR</button><button class="danger" onclick="voidBill('${b.id}')">Void</button></div></td></tr>`))
+ :'<div class="empty">'+(q?'No multi-product bills match your search.':'No multi-product bills recorded yet. Add multiple products to one bill when recording a sale.')+'</div>';
+}
+function voidBill(billId){const lines=db.sales.filter(s=>s.billId===billId);if(!lines.length||!confirm('Void this entire multi-product bill and return all its quantities to stock? Only do this for a genuine correction.'))return;for(const s of lines){const p=product(s.productId);if(p)p.qty=Number(p.qty)+Number(s.qty);if(s.debtId)db.debts=db.debts.filter(d=>d.id!==s.debtId)}logActivity('Bill voided',`${billId}; ${lines.length} product line(s)`);db.sales=db.sales.filter(s=>s.billId!==billId);save()}
+
+function voidSale(id){const s=db.sales.find(x=>x.id===id);if(!s||!confirm('Void this sale and return its quantity to stock? Only do this for a genuine correction.'))return;const p=product(s.productId);if(p)p.qty=Number(p.qty)+Number(s.qty);if(s.debtId)db.debts=db.debts.filter(d=>d.id!==s.debtId);logActivity('Sale voided',`${s.productName} x ${s.qty}; ${money(s.total)}`);db.sales=db.sales.filter(x=>x.id!==id);save()}
+function renderDebts(){const q=val('debtSearch').toLowerCase();document.getElementById('debtTable').innerHTML=table(['Customer','Created / Due','Original','Paid','Balance','Action'],db.debts.filter(d=>(d.name+' '+d.phone).toLowerCase().includes(q)).map(d=>`<tr><td><strong>${esc(d.name)}</strong><div class="muted small">${esc(d.phone||'')}</div></td><td>${esc(d.date)}<div class="muted small">${esc(d.due||'No due date')}</div></td><td>${money(d.amount)}</td><td>${money(d.paid||0)}</td><td><strong>${money(Math.max(0,d.amount-(d.paid||0)))}</strong></td><td><button class="secondary" onclick="repay('${d.id}')">Record repayment</button> <button class="danger" onclick="deleteDebt('${d.id}')">Delete</button></td></tr>`))}
+function repay(id){const d=db.debts.find(x=>x.id===id);if(!d)return;const remaining=d.amount-(d.paid||0);const a=Number(prompt(`Remaining ${money(remaining)}. Enter repayment amount (₵):`));if(!Number.isFinite(a)||a<=0||a>remaining)return alert('Enter a valid amount not exceeding the balance.');d.paid=(d.paid||0)+a;d.payments=d.payments||[];d.payments.push({amount:a,date:today()});logActivity('Debt repayment recorded',`${d.name}: ${money(a)}`);save()}
+function deleteDebt(id){if(confirm('Delete this debt record?')){db.debts=db.debts.filter(d=>d.id!==id);save()}}
+function renderExpenses(){document.getElementById('expenseTable').innerHTML=table(['Date','Description','Method','Reference','Amount','Action'],db.expenses.slice().reverse().map(e=>`<tr><td>${esc(e.date)}</td><td>${esc(e.desc)}</td><td>${esc(e.method)}</td><td>${esc(e.ref||'')}</td><td>${money(e.amount)}</td><td><button class="danger" onclick="deleteExpense('${e.id}')">Delete</button></td></tr>`))}
+function deleteExpense(id){if(confirm('Delete this expense?')){db.expenses=db.expenses.filter(e=>e.id!==id);save()}}
+function renderStaff(){const options='<option value="">No staff selected</option>'+db.staff.map(s=>`<option value="${s.id}">${esc(s.name)}${s.role?' — '+esc(s.role):''}</option>`).join('');const op=document.getElementById('operator'),saleOp=document.getElementById('saleStaff'),old=op.value,oldSale=saleOp.value;op.innerHTML=options; saleOp.innerHTML=options;op.value=old;saleOp.value=oldSale;document.getElementById('staffTable').innerHTML=table(['Staff','Role','Recorded sales','Estimated gross profit','Actions'],db.staff.map(s=>{const sales=db.sales.filter(x=>x.operatorId===s.id);return `<tr><td><strong>${esc(s.name)}</strong></td><td>${esc(s.role||'')}</td><td>${money(sales.reduce((a,x)=>a+x.total,0))} (${sales.length} transactions)</td><td>${money(sales.reduce((a,x)=>a+x.profit,0))}</td><td><button class="danger" onclick="deleteStaff('${s.id}')">Remove</button></td></tr>`}))}
+function deleteStaff(id){if(confirm('Remove staff from list? Existing sale records keep their name.')){db.staff=db.staff.filter(s=>s.id!==id);renderStaff()}}
+function renderAdjustments(){document.getElementById('adjustments').innerHTML=table(['Date','Product','Change','Reason','Note'],db.adjustments.slice().reverse().map(a=>`<tr><td>${esc(a.date)}</td><td>${esc(a.name)}</td><td class="${a.qty<0?'bad':'good'}">${a.qty>0?'+':''}${a.qty}</td><td>${esc(a.reason)}</td><td>${esc(a.note||'')}</td></tr>`))}
+function renderActivity(){const rows=(db.activity||[]).slice().reverse().slice(0,150);document.getElementById('activityTable').innerHTML=rows.length?table(['Date / time','User / operator','Action','Details'],rows.map(a=>`<tr><td>${esc(a.date)}<div class="muted small">${esc(a.time||'')}</div></td><td>${esc(a.operator||'Current device user')}</td><td><strong>${esc(a.action)}</strong></td><td>${esc(a.details||'')}</td></tr>`)):'<div class="empty">No activity logged yet. New actions will appear here.</div>'}
+function updateSalePreview(){const p=product(val('saleProduct'));const qty=num('saleQty'),price=num('salePrice'),disc=num('saleDiscount');const total=Math.max(0,qty*price-disc);document.getElementById('salePreview').innerHTML=p?`Available stock: <b>${p.qty} ${esc(p.unit)}</b> · Sale total: <b>${money(total)}</b> · Estimated gross profit: <b>${money(total-qty*p.cost)}</b>`:'Choose a product to preview totals.';if(p&&!document.getElementById('salePrice').dataset.touched)document.getElementById('salePrice').value=p.price}
+function bestProductRows(){const from=val('bpFrom')||'0000-01-01',to=val('bpTo')||'9999-12-31';const filtered=db.sales.filter(s=>s.date>=from&&s.date<=to);const map=new Map();filtered.forEach(s=>{const key=s.productId||s.productName;let r=map.get(key);if(!r){const p=product(s.productId);r={id:key,name:s.productName||p?.name||'Unknown product',qty:0,revenue:0,profit:0,transactions:0,stock:Number(p?.qty??0),unit:p?.unit||s.unit||'unit'};map.set(key,r)}r.qty+=Number(s.qty)||0;r.revenue+=Number(s.total)||0;r.profit+=Number(s.profit)||0;r.transactions+=1});db.products.forEach(p=>{const key=p.id;if(!map.has(key))map.set(key,{id:key,name:p.name,qty:0,revenue:0,profit:0,transactions:0,stock:Number(p.qty)||0,unit:p.unit||'unit'})});return [...map.values()].sort((a,b)=>b.qty-a.qty||b.revenue-a.revenue||a.name.localeCompare(b.name))}
+function renderBestProducts(){const rows=bestProductRows(),from=val('bpFrom')||'all dates',to=val('bpTo')||'all dates',sold=rows.reduce((a,r)=>a+r.qty,0),revenue=rows.reduce((a,r)=>a+r.revenue,0),top=rows.find(r=>r.qty>0);document.getElementById('bpSummary').innerHTML=`<div class="card stat"><small>Products tracked</small><strong>${rows.length}</strong><em>Products with or without sales</em></div><div class="card stat"><small>Units sold</small><strong>${sold.toLocaleString()}</strong><em>Across selected period</em></div><div class="card stat"><small>Sales value</small><strong>${money(revenue)}</strong><em>Recorded sales total</em></div><div class="card stat"><small>Top seller</small><strong style="font-size:18px">${top?esc(top.name):'—'}</strong><em>${top?top.qty+' '+esc(top.unit)+' sold':'No sales in this period'}</em></div>`;const award=document.getElementById('bpAward');award.innerHTML=top?`<div class="bp-award"><div class="bp-award-icon" aria-hidden="true">₵</div><div class="bp-award-copy"><div class="bp-award-label">Best Seller Award · ${from==='all dates'&&to==='all dates'?'All recorded sales':esc(from)+' to '+esc(to)}</div><h3>₵ ${esc(top.name)}</h3><p>Champion product · ${top.qty.toLocaleString()} ${esc(top.unit)} sold · Sales value ${money(top.revenue)}</p></div></div>`:`<div class="bp-award bp-award-empty"><div class="bp-award-icon" aria-hidden="true">₵</div><div class="bp-award-copy"><div class="bp-award-label">Best Seller Award</div><h3>No winner yet</h3><p>Record product sales to award the top-selling product for the selected dates.</p></div></div>`;const graphRows=rows.filter(r=>r.qty>0).slice(0,10),max=Math.max(1,...graphRows.map(r=>r.qty));document.getElementById('bpGraph').innerHTML=graphRows.length?graphRows.map((r,i)=>`<div class="bp-row"><div class="bp-name"><span class="bp-rank">${i+1}</span>${esc(r.name)}</div><div class="bp-track"><div class="bp-fill" style="width:${Math.max(1,r.qty/max*100)}%"></div></div><div class="bp-value">${r.qty.toLocaleString()} ${esc(r.unit)}</div></div>`).join(''):'<div class="empty">No sales recorded for this period. Record sales to generate the graph.</div>';document.getElementById('bpTable').innerHTML=rows.length?table(['Rank','Product','Qty sold','Sales value','Gross profit*','Transactions','Stock available'],rows.map((r,i)=>`<tr><td>${i===0&&r.qty>0?`<span class="bp-medal">₵ 1st · Award</span>`:`<span class="bp-rank">${i+1}</span>`}</td><td><strong>${esc(r.name)}</strong></td><td><strong>${r.qty.toLocaleString()} ${esc(r.unit)}</strong></td><td>${money(r.revenue)}</td><td>${money(r.profit)}</td><td>${r.transactions}</td><td>${r.stock.toLocaleString()} ${esc(r.unit)}</td></tr>`)):'<div class="empty">Add products and record sales to see product rankings.</div>'}
+document.getElementById('bpApply').onclick=renderBestProducts;document.getElementById('bpClear').onclick=()=>{document.getElementById('bpFrom').value='';document.getElementById('bpTo').value='';renderBestProducts()};document.getElementById('bpExport').onclick=()=>{const rows=bestProductRows();download('Digital-Store-Manager-best-selling-products-'+today()+'.csv',csv([['Rank','Product','Quantity sold','Unit','Sales value GHS','Estimated gross profit GHS','Transactions','Stock available'],...rows.map((r,i)=>[i+1,r.name,r.qty,r.unit,r.revenue,r.profit,r.transactions,r.stock])]),'text/csv')};
+function renderDash(){const t=today(),sales=db.sales.filter(s=>s.date===t);document.getElementById('kSales').textContent=money(sales.reduce((a,s)=>a+s.total,0));document.getElementById('kProfit').textContent=money(sales.reduce((a,s)=>a+s.profit,0));document.getElementById('kDebt').textContent=money(db.debts.reduce((a,d)=>a+Math.max(0,d.amount-(d.paid||0)),0));const low=db.products.filter(p=>p.qty<=p.reorder);document.getElementById('kLow').textContent=low.length;document.getElementById('dashAlerts').innerHTML=low.length?'<ul>'+low.map(p=>`<li><b>${esc(p.name)}</b>: ${p.qty} ${esc(p.unit)} left (alert at ${p.reorder})</li>`).join('')+'</ul>':'<div class="empty">No low-stock alerts. Add products to start tracking.</div>';const items=[...db.sales.map(s=>({date:s.date,label:'Sale: '+s.productName,amount:s.total})),...db.expenses.map(e=>({date:e.date,label:'Expense: '+e.desc,amount:-e.amount})),...db.adjustments.map(a=>({date:a.date,label:'Stock: '+a.name+' ('+(a.qty>0?'+':'')+a.qty+')',amount:0}))].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,6);document.getElementById('recent').innerHTML=items.length?table(['Date','Activity','Amount'],items.map(i=>`<tr><td>${esc(i.date)}</td><td>${esc(i.label)}</td><td>${i.amount<0?'<span class="bad">−'+money(-i.amount)+'</span>':money(i.amount)}</td></tr>`)):'<div class="empty">Your sales and expenses will appear here.</div>'}
+function renderAll(){renderStock();renderSales();renderDebts();renderExpenses();renderStaff();renderAdjustments();renderActivity();renderDash();document.getElementById('bizName').value=db.settings.bizName||'';document.getElementById('ownerName').value=db.settings.ownerName||''}
+document.getElementById('productForm').onsubmit=e=>{e.preventDefault();const id=val('productId'),existing=product(id),p={id:id||uid(),name:val('pName'),category:val('pCategory'),unit:val('pUnit')||'piece',cost:num('pCost'),price:num('pPrice'),qty:num('pQty'),reorder:num('pReorder'),supplier:val('pSupplier')};if(existing){const oldQty=Number(existing.qty);Object.assign(existing,p);existing.qty=Number(p.qty);if(oldQty!==p.qty)db.adjustments.push({id:uid(),date:today(),productId:p.id,name:p.name,qty:p.qty-oldQty,reason:'Edit quantity',note:'Quantity edited in product form'})}else db.products.push(p);e.target.reset();document.getElementById('productId').value='';document.getElementById('pUnit').value='piece';document.getElementById('pQty').value=0;document.getElementById('pReorder').value=5;save()};
+document.getElementById('cancelProduct').onclick=()=>{document.getElementById('productForm').reset();document.getElementById('productId').value='';document.getElementById('pUnit').value='piece';document.getElementById('pQty').value=0;document.getElementById('pReorder').value=5};
+document.getElementById('clearSalesSearch').onclick=()=>{document.getElementById('salesSearch').value='';renderSales()};
+document.getElementById('saleProduct').onchange=()=>{document.getElementById('salePrice').dataset.touched='';updateSalePreview()};
+['saleProductSearch','adjProductSearch'].forEach(id=>document.getElementById(id).addEventListener('input',()=>{const selectId=id==='saleProductSearch'?'saleProduct':'adjProduct';populateSelect(selectId,'');if(selectId==='saleProduct'){document.getElementById('salePrice').dataset.touched='';updateSalePreview()}}));['saleQty','salePrice','saleDiscount'].forEach(id=>document.getElementById(id).addEventListener('input',()=>{if(id==='salePrice')document.getElementById('salePrice').dataset.touched='1';updateSalePreview()}));
+
+// Multi-product bill: add several products, then save the combined bill once.
+let billCart=[];
+function renderBillCart(){
+  const wrap=document.getElementById('billCart');
+  const total=billCart.reduce((sum,item)=>sum+item.qty*item.price-item.discount,0);
+  wrap.innerHTML=billCart.length?table(['Product','Qty','Unit price','Discount','Line total','Action'],billCart.map((item,i)=>`<tr><td><strong>${esc(item.productName)}</strong></td><td>${item.qty}</td><td>${money(item.price)}</td><td>${money(item.discount)}</td><td><strong>${money(item.qty*item.price-item.discount)}</strong></td><td><button type="button" class="danger" onclick="removeBillItem(${i})">Remove</button></td></tr>`)):'<div class="empty">No products added to this bill yet. Select a product and tap “Add product to bill”.</div>';
+  document.getElementById('billSummary').innerHTML=`<strong>Combined bill total: ${money(Math.max(0,total))}</strong> · ${billCart.length} product line${billCart.length===1?'':'s'}`;
+}
+function removeBillItem(i){billCart.splice(i,1);renderBillCart()}
+function addCurrentItemToBill(){
+  const p=product(val('saleProduct')),qty=num('saleQty'),price=num('salePrice'),discount=num('saleDiscount');
+  if(!p)return alert('Add/select a product first.');
+  if(qty<=0||qty>Number(p.qty))return alert('Quantity must be positive and cannot exceed available stock.');
+  if(price<0||discount>qty*price)return alert('Check selling price and discount.');
+  const already=billCart.filter(x=>x.productId===p.id).reduce((sum,x)=>sum+x.qty,0);
+  if(qty+already>Number(p.qty))return alert(`Only ${p.qty} ${p.unit} available in stock, including what is already in this bill.`);
+  billCart.push({productId:p.id,productName:p.name,qty,unit:p.unit,price,cost:Number(p.cost),discount});
+  renderBillCart();
+  // Keep customer/payment details for the complete bill, while allowing another product selection.
+  document.getElementById('saleQty').value=1;
+  document.getElementById('saleDiscount').value=0;
+  document.getElementById('salePrice').dataset.touched='';
+  document.getElementById('saleProduct').selectedIndex=0;
+  updateSalePreview();
+}
+document.getElementById('addBillItem').onclick=addCurrentItemToBill;
+document.getElementById('clearBill').onclick=()=>{billCart=[];renderBillCart()};
+
+document.getElementById('saleForm').onsubmit=e=>{
+  e.preventDefault();
+  // If the trader did not explicitly add a line, treat the currently selected product as a one-line bill.
+  if(!billCart.length){
+    const p=product(val('saleProduct')),qty=num('saleQty'),price=num('salePrice'),discount=num('saleDiscount');
+    if(!p)return alert('Add/select a product first.');
+    if(qty<=0||qty>Number(p.qty))return alert('Quantity must be positive and cannot exceed available stock.');
+    if(price<0||discount>qty*price)return alert('Check selling price and discount.');
+    billCart.push({productId:p.id,productName:p.name,qty,unit:p.unit,price,cost:Number(p.cost),discount});
+  }
+  const customer=val('saleCustomer').trim();
+  const date=dateInput('saleDate');
+  const lines=billCart.map(x=>({...x,total:Math.max(0,x.qty*x.price-x.discount)}));
+  const total=lines.reduce((sum,x)=>sum+x.total,0);
+  const paidRaw=document.getElementById('salePaid').value;
+  const paid=paidRaw===''?(val('saleMethod')==='Credit / unpaid'?0:total):Number(paidRaw);
+  if(paid<0||paid>total)return alert('Amount received must be between zero and combined bill total.');
+  // Re-check stock at save time to prevent overselling.
+  const needed={};lines.forEach(x=>needed[x.productId]=(needed[x.productId]||0)+x.qty);
+  for(const [pid,qty] of Object.entries(needed)){const p=product(pid);if(!p||qty>Number(p.qty))return alert(`Not enough stock for ${p?p.name:'one of the selected products'}.`)}
+  const op=db.staff.find(s=>s.id===val('saleStaff'));
+  const billId=billCart.length>1?('BILL-'+Date.now()+'-'+Math.random().toString(36).slice(2,5)):'';
+  let remainingPaid=paid;
+  lines.forEach((line,index)=>{
+    const p=product(line.productId);
+    const linePaid=index===lines.length-1?Math.min(line.total,remainingPaid):Math.min(line.total,remainingPaid);
+    remainingPaid=Math.max(0,remainingPaid-linePaid);
+    const s={id:uid(),productId:p.id,productName:p.name,qty:line.qty,unit:line.unit,price:line.price,cost:line.cost,total:line.total,paid:linePaid,method:val('saleMethod'),ref:val('saleRef'),customer:customer,date,operatorId:op?.id||'',operator:op?.name||'',profit:line.total-line.qty*line.cost, billId};
+    p.qty=Number(p.qty)-line.qty;
+    if(line.total>linePaid){
+      const d={id:uid(),name:customer||'Unspecified customer',phone:'',amount:line.total-linePaid,paid:0,date,due:'',note:'Credit from sale '+s.id,saleId:s.id,billId:s.billId};
+      db.debts.push(d);s.debtId=d.id;
+    }
+    db.sales.push(s);
+  });
+  logActivity('Sale recorded',`${lines.length} product line(s); total ${money(total)}; received ${money(paid)}; customer ${customer||'Walk-in'}`);
+  const savedTotal=total;
+  const savedLines=lines.map(line=>({...line}));
+  const savedBillId=billId;
+  const savedCustomer=customer||'Walk-in customer';
+  const savedMethod=val('saleMethod'),savedRef=val('saleRef'),savedOperator=op?.name||'';
+  billCart=[];
+  e.target.reset();
+  document.getElementById('saleDate').value=today();
+  document.getElementById('saleDiscount').value=0;
+  renderBillCart();
+  save();
+  alert('Sale saved. Combined total: '+money(savedTotal)+'. '+(savedTotal>paid?'Outstanding balance: '+money(savedTotal-paid):'Payment recorded: '+money(paid)));
+  const invoiceId=savedBillId||('INV-'+String(db.sales[db.sales.length-1]?.id||Date.now()));
+  invoiceShow({id:invoiceId,date,customer:savedCustomer,lines:savedLines,total:savedTotal,paid,method:savedMethod,ref:savedRef,operator:savedOperator,kind:savedLines.length>1?'multi':'single'});
+};
+document.getElementById('adjustForm').onsubmit=e=>{e.preventDefault();const p=product(val('adjProduct')),q=num('adjQty');if(!p||q===0)return alert('Select a product and enter a non-zero quantity.');if(Number(p.qty)+q<0)return alert('Adjustment would make stock negative.');p.qty=Number(p.qty)+q;db.adjustments.push({id:uid(),date:today(),productId:p.id,name:p.name,qty:q,reason:val('adjReason'),note:val('adjNote')});logActivity('Stock adjusted',`${p.name}: ${q>0?'+':''}${q}; ${val('adjReason')}`);e.target.reset();save()};
+document.getElementById('debtForm').onsubmit=e=>{e.preventDefault();db.debts.push({id:uid(),name:val('dName'),phone:val('dPhone'),amount:num('dAmount'),paid:0,date:today(),due:val('dDue'),note:val('dNote')});logActivity('Debt added',`${val('dName')}: ${money(num('dAmount'))}`);e.target.reset();save()};
+document.getElementById('expenseForm').onsubmit=e=>{e.preventDefault();db.expenses.push({id:uid(),desc:val('eDesc'),amount:num('eAmount'),method:val('eMethod'),date:dateInput('eDate'),ref:val('eRef')});logActivity('Expense recorded',`${val('eDesc')}: ${money(num('eAmount'))}`);e.target.reset();document.getElementById('eDate').value=today();save()};
+document.getElementById('staffForm').onsubmit=e=>{e.preventDefault();db.staff.push({id:uid(),name:val('stName'),role:val('stRole')});logActivity('Staff added',`${val('stName')} (${val('stRole')||'no role'})`);e.target.reset();save()};
+document.getElementById('saveSettings').onclick=()=>{db.settings={bizName:val('bizName'),ownerName:val('ownerName')};save();alert('Settings saved.')};
+document.getElementById('backupBtn').onclick=()=>download('Digital-Store-Manager-backup-'+today()+'.json',JSON.stringify(db,null,2),'application/json');
+document.getElementById('exportActivity').onclick=()=>download('Digital-Store-Manager-activity-'+today()+'.csv',csv([['Date','Time','Operator','Action','Details'],...(db.activity||[]).map(a=>[a.date,a.time,a.operator,a.action,a.details])]),'text/csv');
+document.getElementById('restoreFile').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(!d.products||!d.sales||!d.debts||!d.expenses)throw Error('Invalid backup');if(!confirm('Restore will replace all records on this device. Continue?'))return;db=d;save();alert('Backup restored.')}catch(err){alert('Could not restore this file. Please select a valid Master POS JSON backup.')}e.target.value=''};
+document.getElementById('csvSales').onclick=()=>download('Digital-Store-Manager-sales-'+today()+'.csv',csv([['Date','Product','Quantity','Unit Price','Total','Received','Balance','Payment Method','MoMo Reference','Customer','Staff','Estimated Gross Profit'],...db.sales.map(s=>[s.date,s.productName,s.qty,s.price,s.total,s.paid,s.total-s.paid,s.method,s.ref,s.customer,s.operator,s.profit])]),'text/csv');
+document.getElementById('csvStock').onclick=()=>download('Digital-Store-Manager-stock-'+today()+'.csv',csv([['Product','Category','Unit','Quantity','Buying Cost','Selling Price','Stock Value','Reorder Level','Supplier'],...db.products.map(p=>[p.name,p.category,p.unit,p.qty,p.cost,p.price,p.qty*p.cost,p.reorder,p.supplier])]),'text/csv');
+document.getElementById('clearAll').onclick=()=>{if(confirm('PERMANENTLY delete all Master POS records from this browser? Download a backup first.')){localStorage.removeItem(KEY);db=blank();save()}};
+['salesSearch','stockSearch','debtSearch'].forEach(id=>document.getElementById(id).addEventListener('input',()=>({salesSearch:renderSales,stockSearch:renderStock,debtSearch:renderDebts}[id])()));
+document.getElementById('movementSearch').addEventListener('input',renderStockMovement);
+document.getElementById('exportStockMovement').onclick=()=>{const rows=stockMovementRows();download('Digital-Store-Manager-stock-movement-'+today()+'.csv',csv([['Product','Category','Unit','Stock taken out (sold)','Stock added','Stock removed / wastage','Available now','Sales records'],...rows.map(({p,sold,added,removed,available,saleCount})=>[p.name,p.category,p.unit,sold,added,removed,available,saleCount])]),'text/csv')};
+function reportData(){const from=val('rFrom')||'0000-01-01',to=val('rTo')||'9999-12-31',s=db.sales.filter(x=>x.date>=from&&x.date<=to),ex=db.expenses.filter(x=>x.date>=from&&x.date<=to);return {from,to,s,ex,sales:s.reduce((a,x)=>a+x.total,0),received:s.reduce((a,x)=>a+x.paid,0),cogs:s.reduce((a,x)=>a+x.qty*x.cost,0),gross:s.reduce((a,x)=>a+x.profit,0),expenses:ex.reduce((a,x)=>a+x.amount,0)}}
+function runReport(){const r=reportData();document.getElementById('reportResult').innerHTML=`<div class="grid" style="margin-top:14px"><div class="card stat"><small>Sales total</small><strong>${money(r.sales)}</strong></div><div class="card stat"><small>Money received</small><strong>${money(r.received)}</strong></div><div class="card stat"><small>Estimated gross profit</small><strong>${money(r.gross)}</strong></div><div class="card stat"><small>Estimated net profit</small><strong>${money(r.gross-r.expenses)}</strong></div></div><p class="muted small">${r.s.length} sales · ${r.ex.length} expenses · Period ${r.from} to ${r.to}. Net profit excludes other unrecorded costs, taxes and inventory valuation adjustments.</p>`}
+document.getElementById('runReport').onclick=runReport;document.getElementById('exportReport').onclick=()=>{const r=reportData();download('Digital-Store-Manager-report-'+r.from+'-to-'+r.to+'.csv',csv([['Metric','Amount (GHS)'],['Sales',r.sales],['Money received',r.received],['Estimated cost of goods sold',r.cogs],['Estimated gross profit',r.gross],['Expenses',r.expenses],['Estimated net profit',r.gross-r.expenses],['Unpaid balances from sales',r.s.reduce((a,s)=>a+s.total-s.paid,0)]]),'text/csv')};
+
+// Digital Archives use IndexedDB so document files are not placed in the main sales backup.
+const ARCHIVE_DB='DigitalStoreManagerArchives', ARCHIVE_STORE='documents';
+let archiveDB=null, archiveReady=false;
+function openArchiveDB(){return new Promise((resolve,reject)=>{if(!('indexedDB' in window)){reject(new Error('This browser does not support local document storage.'));return}const req=indexedDB.open(ARCHIVE_DB,1);req.onupgradeneeded=()=>{const d=req.result;if(!d.objectStoreNames.contains(ARCHIVE_STORE)){const s=d.createObjectStore(ARCHIVE_STORE,{keyPath:'id'});s.createIndex('createdAt','createdAt')}};req.onsuccess=()=>{archiveDB=req.result;archiveReady=true;resolve(archiveDB)};req.onerror=()=>reject(req.error||new Error('Could not open local archive storage.'))})}
+function archiveAll(){return new Promise((resolve,reject)=>{const r=archiveDB.transaction(ARCHIVE_STORE,'readonly').objectStore(ARCHIVE_STORE).getAll();r.onsuccess=()=>resolve(r.result||[]);r.onerror=()=>reject(r.error)})}
+function archivePut(doc){return new Promise((resolve,reject)=>{const tx=archiveDB.transaction(ARCHIVE_STORE,'readwrite');tx.objectStore(ARCHIVE_STORE).put(doc);tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error||new Error('Storage failed'));tx.onabort=()=>reject(tx.error||new Error('Storage failed'))})}
+function archiveDelete(id){return new Promise((resolve,reject)=>{const tx=archiveDB.transaction(ARCHIVE_STORE,'readwrite');tx.objectStore(ARCHIVE_STORE).delete(id);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}
+function escArchive(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function archiveSize(n){if(n<1024)return n+' B';if(n<1048576)return (n/1024).toFixed(1)+' KB';return (n/1048576).toFixed(2)+' MB'}
+async function renderArchives(){const list=document.getElementById('archiveList');if(!archiveReady){list.innerHTML='<p class="muted">Archive storage is not available in this browser.</p>';return}try{let docs=await archiveAll();const q=(document.getElementById('archiveSearch').value||'').trim().toLowerCase();docs.sort((a,b)=>(b.createdAt||'').localeCompare(a.createdAt||''));const filtered=docs.filter(d=>[d.title,d.category,d.notes,d.fileName,d.date].some(v=>String(v||'').toLowerCase().includes(q)));document.getElementById('archiveStats').textContent=`${docs.length} document${docs.length===1?'':'s'} saved on this device · ${filtered.length} shown`;if(!filtered.length){list.innerHTML='<p class="muted">No matching documents. Add a document above to get started.</p>';return}list.innerHTML=filtered.map(d=>`<div class="card" style="margin:10px 0;padding:13px"><div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap"><div style="min-width:0;flex:1"><strong>${escArchive(d.title)}</strong><div class="muted small">${escArchive(d.category)} · ${escArchive(d.date||'No date')} · ${escArchive(archiveSize(d.size||0))}</div><div class="small" style="overflow-wrap:anywhere">${escArchive(d.fileName)}</div>${d.notes?`<p class="small">${escArchive(d.notes)}</p>`:''}</div><div style="display:flex;gap:7px;flex-wrap:wrap"><button class="secondary" type="button" data-archive-download="${d.id}">Open / Download</button><button class="danger" type="button" data-archive-delete="${d.id}">Delete</button></div></div></div>`).join('');list.querySelectorAll('[data-archive-download]').forEach(b=>b.onclick=async()=>{const doc=(await archiveAll()).find(x=>x.id===b.dataset.archiveDownload);if(!doc)return;const url=URL.createObjectURL(doc.file);const a=document.createElement('a');a.href=url;a.download=doc.fileName;a.target='_blank';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000)});list.querySelectorAll('[data-archive-delete]').forEach(b=>b.onclick=async()=>{if(!confirm('Delete this archived document from this device? This cannot be undone.'))return;try{await archiveDelete(b.dataset.archiveDelete);await renderArchives()}catch(e){alert('Could not delete document.')}})}catch(e){list.innerHTML='<p class="muted">Could not read the local archive. Please try reopening this page.</p>'}}
+document.getElementById('archiveSave').onclick=async()=>{const title=document.getElementById('archiveTitle').value.trim(),file=document.getElementById('archiveFile').files[0];const status=document.getElementById('archiveStatus');if(!title||!file){status.textContent='Enter a title and choose a file.';return}if(!archiveReady){status.textContent='Local archive storage is unavailable in this browser.';return}if(file.size>100*1024*1024&&!confirm('This file is larger than 100 MB. Your browser may not have enough space. Try saving it?'))return;const btn=document.getElementById('archiveSave');btn.disabled=true;status.textContent='Saving…';try{await archivePut({id:uid(),title,category:document.getElementById('archiveCategory').value,date:document.getElementById('archiveDate').value,notes:document.getElementById('archiveNotes').value.trim(),fileName:file.name,mimeType:file.type,size:file.size,file,createdAt:new Date().toISOString()});document.getElementById('archiveTitle').value='';document.getElementById('archiveNotes').value='';document.getElementById('archiveFile').value='';status.textContent='Document saved on this device.';await renderArchives()}catch(e){status.textContent='Save failed. Device storage may be full or restricted.'}finally{btn.disabled=false}};
+document.getElementById('archiveSearch').addEventListener('input',renderArchives);
+document.getElementById('archiveExportIndex').onclick=async()=>{try{const docs=await archiveAll();download('Digital-Store-Manager-archive-index-'+today()+'.csv',csv([['Title','Category','Date','Filename','Size (bytes)','Notes','Saved at'],...docs.map(d=>[d.title,d.category,d.date,d.fileName,d.size,d.notes,d.createdAt])]),'text/csv')}catch(e){alert('Could not export archive list.')}};
+document.getElementById('archiveDate').value=today();
+openArchiveDB().then(renderArchives).catch(()=>{document.getElementById('archiveList').innerHTML='<p class="muted">This browser does not support local archive storage. Try opening the app in a modern browser.</p>'});
+
+['saleDate','eDate'].forEach(id=>document.getElementById(id).value=today());document.getElementById('rFrom').value=today().slice(0,8)+'01';document.getElementById('rTo').value=today();
+renderAll();updateSalePreview();renderBillCart();
+</script><div id="invoicePrintRoot"></div>
+
+<style id="license-gate-style">#mposLicenseGate{position:fixed;inset:0;z-index:2147483647;background:#f2f5f3;color:#172521;display:flex;align-items:center;justify-content:center;padding:18px;font-family:system-ui,Arial}#mposLicenseGate .box{width:min(520px,100%);background:white;border:1px solid #dce5df;border-radius:16px;padding:24px;box-shadow:0 15px 55px #102b221f}#mposLicenseGate h2{margin-top:0;color:#123c35}#mposLicenseGate p{line-height:1.5;color:#5c6c65}#mposLicenseGate input{display:block;width:100%;padding:12px;border:1px solid #bdcbc3;border-radius:8px;margin:9px 0;font:inherit}#mposLicenseGate button{background:#123c35;color:white;border:0;border-radius:8px;padding:12px 16px;font-weight:700;cursor:pointer}#mposLicenseGate .msg{margin-top:12px;padding:10px;border-radius:8px;background:#fff4d8;color:#72500a;font-size:14px}</style>
+<div id="mposLicenseGate"><div class="box"><h2>Activate Master POS</h2><p>This copy is licensed to one registered browser installation. Send the Installation ID below to the software owner. The owner must issue a license for this ID.</p><div style="padding:10px;background:#eef4f0;border-radius:8px;overflow-wrap:anywhere"><b>Installation ID</b><br><code id="mposDeviceId" style="font-size:13px"></code><button type="button" id="mposCopyDevice" style="margin-top:8px">Copy ID</button></div><textarea id="mposLicenseKey" rows="3" placeholder="Paste your signed licence key here" style="display:block;width:100%;padding:12px;border:1px solid #bdcbc3;border-radius:8px;margin:9px 0;font:inherit"></textarea><button id="mposActivate">Verify and activate</button><div id="mposLicenseMsg" class="msg">No licence key entered.</div><p style="font-size:12px">Keep this browser profile and its data. Clearing browser data or moving to another browser/device may change the Installation ID and require a new license. This is a browser-installation lock, not a hardware serial-number lock.</p></div></div>
+<script>
+(()=>{const PUBLIC_JWK={"kty":"OKP","crv":"Ed25519","x":"9bIDgsilSMi67ME3dUr6ipQaBz8PyHAy0iSPvBm9VR4"};const enc=new TextEncoder();const gate=document.getElementById('mposLicenseGate');const msg=document.getElementById('mposLicenseMsg');let deviceId=localStorage.getItem('mpos_device_install_id_v1');if(!deviceId){deviceId='MPOS-DEV-'+crypto.randomUUID().toUpperCase();localStorage.setItem('mpos_device_install_id_v1',deviceId)}document.getElementById('mposDeviceId').textContent=deviceId;document.getElementById('mposCopyDevice').onclick=async()=>{try{await navigator.clipboard.writeText(deviceId);msg.textContent='Installation ID copied. Send it to the software owner.'}catch(e){msg.textContent='Please select and copy the Installation ID shown above.'}};
+function unb64(s){s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';return Uint8Array.from(atob(s),c=>c.charCodeAt(0))}
+function decodeKey(token){const parts=token.trim().split('.');if(parts.length!==3||parts[0]!=='MPOS1')throw Error('Invalid licence key format. Paste the complete key issued by the software owner.');const raw=new TextDecoder().decode(unb64(parts[1]));return {payload:JSON.parse(raw),signature:parts[2],algorithm:'Ed25519'}}
+async function verify(lic){if(!lic||!lic.payload||!lic.signature||lic.algorithm!=='Ed25519')throw Error('Unsupported licence key.');const p=lic.payload;if(p.format!=='master-pos-license-v1'||p.product!=='Master POS'||!p.licenseId||!p.customer||!p.deviceId)throw Error('Licence details are invalid or not device-bound.');if(p.deviceId!==deviceId)throw Error('This key belongs to a different installation ID. Ask the owner for a key generated for this device.');const key=await crypto.subtle.importKey('jwk',PUBLIC_JWK,{name:'Ed25519'},false,['verify']);const ok=await crypto.subtle.verify({name:'Ed25519'},key,unb64(lic.signature),enc.encode(JSON.stringify(p)));if(!ok)throw Error('Signature invalid. This key was not issued by the matching owner issuer.');if(p.expiresAt&&Date.now()>Date.parse(p.expiresAt))throw Error('This licence has expired. Ask the owner for a new key.');return p}
+async function activate(){try{const token=document.getElementById('mposLicenseKey').value.trim();if(!token)throw Error('Paste the licence key first.');const lic=decodeKey(token);const p=await verify(lic);localStorage.setItem('mpos_signed_license_v1',JSON.stringify(lic));msg.textContent='Activated for '+p.customer+' · '+p.licenseId+' · '+(p.durationLabel||'');gate.style.display='none'}catch(e){msg.textContent=e.message||'Activation failed.'}}
+document.getElementById('mposActivate').addEventListener('click',activate);
+(async()=>{try{const saved=localStorage.getItem('mpos_signed_license_v1');if(saved){const p=await verify(JSON.parse(saved));gate.style.display='none';return}}catch(e){localStorage.removeItem('mpos_signed_license_v1');msg.textContent=e.message}gate.style.display='flex'})();
+})();
+</script>
+
+<script>
+/* PWA support: service worker is served over HTTPS on GitHub Pages. */
+if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(err => console.warn("Offline cache registration failed:", err));
+  });
+}
+</script>
+</body></html>
